@@ -13,15 +13,79 @@
     />
 
     <title>Frontend Mentor | Tip calculator app</title>
+    <script
+      src="https://kit.fontawesome.com/d0b14c9d9b.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="sanitize.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main id="app">
       <header>
-        <h1>SPLITTER</h1>
+        <h1>SPLI<br />TTER</h1>
       </header>
-      <section class="container"></section>
+      <section class="container">
+        <div class="calc-container">
+          <form>
+            <div class="input-group">
+              <div class="bill-input-container">
+                <label for="bill" class="bill-text">Bill</label>
+                <input type="text" />
+              </div>
+              <div class="tip-selection-container">
+                <label for="tip-percentage">Select Tip</label>
+                <div><p>Add tip option</p></div>
+                <div class="tip-button-container">
+                  <div class="tip-buttons">
+                    <button class="tip-button">5%</button>
+                    <button class="delete-button">Delete</button>
+                  </div>
+                  <div class="tip-buttons">
+                    <button class="tip-button">10%</button>
+                    <button class="delete-button">Delete</button>
+                  </div>
+                  <div class="tip-buttons">
+                    <button class="tip-button">15%</button>
+                    <button class="delete-button">Delete</button>
+                  </div>
+                  <div class="tip-buttons">
+                    <button class="tip-button">20%</button>
+                    <button class="delete-button">Delete</button>
+                  </div>
+                  <div class="tip-buttons">
+                    <button class="tip-button">25%</button>
+                    <button class="delete-button">Delete</button>
+                  </div>
+                  <div class="tip-buttons">
+                    <button class="tip-button">30%</button>
+                    <button class="delete-button">Delete</button>
+                  </div>
+                </div>
+              </div>
+              <div class="division-container">
+                <label for="people">Number of People</label>
+                <input type="text" />
+              </div>
+            </div>
+            <div class="output-group">
+              <div class="tip-amount-output">
+                <div>
+                  <h2>Top Amount</h2>
+                  <p>/ person</p>
+                  <h2>$4.27</h2>
+                </div>
+                <div>
+                  <h2>Total</h2>
+                  <p>/ person</p>
+                  <h2>$32.79</h2>
+                </div>
+              </div>
+              <button @click="submit">RESET</button>
+            </div>
+          </form>
+        </div>
+      </section>
     </main>
     <script
       type="module"
@@ -32,6 +96,12 @@
       createApp({
         data() {
           return { msg: 'Hi' };
+        },
+        methods: {
+          submit: function (e) {
+            e.preventDefault();
+            console.log(e);
+          },
         },
       }).mount('#app');
     </script>
