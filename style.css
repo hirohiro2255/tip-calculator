@@ -8,6 +8,9 @@
   --neutral-very-light-grayish-cyan: hsl(189, 41%, 97%);
 }
 
+* {
+  font-family: 'Space Mono', monospace;
+}
 
 h1, h2, h3, h4, p {
   margin: 0;
@@ -28,6 +31,7 @@ body {
 header {
   width: 100%;
   margin-top: 13.3%;
+  margin-bottom: 10.6%;
   /* max-width: 86.66px;
   margin-top: 13.3%;
   margin-left: 38%;
@@ -42,4 +46,48 @@ header img {
   margin-left: auto;
 }
 
+.container {
+  width: 100%;
+  max-width: 550px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #fff;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  box-shadow: 0px 32px 43px rgba(79, 166, 175, 0.200735);
+}
 
+.calc-container {
+  padding: 32px;
+}
+
+.bill-input-container {
+}
+
+.bill-text {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.48;
+  color: var(--neutral-dark-grayish-cyan);
+}
+
+#bill-input {
+  background-image: url(images/icon-dollar.svg);
+  background-repeat: no-repeat;
+  background-position: 20px;
+  background-color: hsla(185, 38%, 97%, 1);
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 5px;
+  text-align: right;
+  font-size: 1.5rem;
+  color: var(--neutral-very-dark-cyan);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+#bill-input:focus {
+  outline: 2px solid var(--primary-cyan);
+}
