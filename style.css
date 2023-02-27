@@ -6,6 +6,7 @@
   --neutral-dark-grayish-cyan: hsl(186, 14%, 43%);
   --neutral-light-grayish-cyan: hsl(185, 41%, 84%);
   --neutral-very-light-grayish-cyan: hsl(189, 41%, 97%);
+  --neutral-red: hsl(4, 50%, 57%);
 }
 
 * {
@@ -16,6 +17,11 @@ h1, h2, h3, h4, p {
   margin: 0;
 }
 
+button {
+  padding: 0;
+  border: none;
+}
+
 body {
   height: 100vh;
   background-color: var(--neutral-light-grayish-cyan);
@@ -23,6 +29,7 @@ body {
 
 #app {
   width: 100%;
+  min-width: 375px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -90,4 +97,57 @@ header img {
 
 #bill-input:focus {
   outline: 2px solid var(--primary-cyan);
+}
+
+.tip-selection-container {
+  margin-top: 32px;
+}
+
+.tip-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tip-label {
+  color: var(--neutral-dark-grayish-cyan);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.tip-option-button {
+  width: 50%;
+  background-color: var(--neutral-very-dark-cyan);
+  color: #fff;
+  border-radius: 5px;
+}
+
+.tip-button-container {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, 44px);
+  gap: 16px;
+}
+
+
+.tip-buttons {
+  display: grid;
+  grid-template-columns: 1fr 44px;
+  column-gap: 4px;
+}
+
+.tip-button {
+  background-color: var(--neutral-very-dark-cyan);
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.delete-button {
+  background-color: var(--neutral-red);
+  color: #fff;
+  border-radius: 5px;
 }

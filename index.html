@@ -27,63 +27,76 @@
       </header>
       <section class="container">
         <div class="calc-container">
-          <form>
-            <div class="input-group">
-              <div class="bill-input-container">
-                <label for="bill-input" class="bill-text">Bill</label>
-                <input id="bill-input" type="text" />
+          <div class="input-group">
+            <div class="bill-input-container">
+              <label for="bill-input" class="bill-text">Bill</label>
+              <input id="bill-input" type="text" />
+            </div>
+            <div class="tip-selection-container">
+              <div class="tip-header">
+                <label for="tip-label" class="tip-label">Select Tip %</label>
+                <button class="tip-option-button">Add tip option</button>
               </div>
-              <div class="tip-selection-container">
-                <label for="tip-percentage">Select Tip</label>
-                <div><p>Add tip option</p></div>
-                <div class="tip-button-container">
-                  <div class="tip-buttons">
-                    <button class="tip-button">5%</button>
-                    <button class="delete-button">Delete</button>
-                  </div>
-                  <div class="tip-buttons">
-                    <button class="tip-button">10%</button>
-                    <button class="delete-button">Delete</button>
-                  </div>
-                  <div class="tip-buttons">
-                    <button class="tip-button">15%</button>
-                    <button class="delete-button">Delete</button>
-                  </div>
-                  <div class="tip-buttons">
-                    <button class="tip-button">20%</button>
-                    <button class="delete-button">Delete</button>
-                  </div>
-                  <div class="tip-buttons">
-                    <button class="tip-button">25%</button>
-                    <button class="delete-button">Delete</button>
-                  </div>
-                  <div class="tip-buttons">
-                    <button class="tip-button">30%</button>
-                    <button class="delete-button">Delete</button>
-                  </div>
+              <!-- <div><p>Add tip option</p></div> -->
+              <div class="tip-button-container">
+                <div class="tip-buttons">
+                  <button class="tip-button">5%</button>
+                  <button class="delete-button">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
                 </div>
-              </div>
-              <div class="division-container">
-                <label for="people">Number of People</label>
-                <input type="text" />
+                <div class="tip-buttons">
+                  <button class="tip-button">10%</button>
+                  <button class="delete-button">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <div class="tip-buttons">
+                  <button class="tip-button">15%</button>
+                  <button class="delete-button">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <div class="tip-buttons">
+                  <button class="tip-button">20%</button>
+                  <button class="delete-button">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <div class="tip-buttons">
+                  <button class="tip-button">25%</button>
+                  <button class="delete-button">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <div class="tip-buttons">
+                  <button class="tip-button">30%</button>
+                  <button class="delete-button">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
               </div>
             </div>
-            <div class="output-group">
-              <div class="tip-amount-output">
-                <div>
-                  <h2>Top Amount</h2>
-                  <p>/ person</p>
-                  <h2>$4.27</h2>
-                </div>
-                <div>
-                  <h2>Total</h2>
-                  <p>/ person</p>
-                  <h2>$32.79</h2>
-                </div>
-              </div>
-              <button @click="submit">RESET</button>
+            <div class="division-container">
+              <label for="people">Number of People</label>
+              <input type="text" />
             </div>
-          </form>
+          </div>
+          <div class="output-group">
+            <div class="tip-amount-output">
+              <div>
+                <h2>Top Amount</h2>
+                <p>/ person</p>
+                <h2>$4.27</h2>
+              </div>
+              <div>
+                <h2>Total</h2>
+                <p>/ person</p>
+                <h2>$32.79</h2>
+              </div>
+            </div>
+            <button @click="submit">RESET</button>
+          </div>
         </div>
       </section>
     </main>
