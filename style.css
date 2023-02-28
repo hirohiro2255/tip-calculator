@@ -184,3 +184,55 @@ header img {
 #people-input:focus {
   outline: 2px solid var(--primary-cyan);
 }
+
+.output-group {
+  border-radius: 15px;
+  margin-top: 32px;
+  padding-top: 37px;
+  padding-bottom: 24px;
+  padding-right: 22px;
+  padding-left: 22px;
+  background-color: var(--neutral-very-dark-cyan);
+}
+
+.tip-amount-output:last-child {
+  margin-bottom: 20px;
+}
+
+.tip-amount-detail-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tip-amount-detail-header h2 {
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.48;
+}
+
+.tip-amount-detail-header p {
+  font-size: 0.81rem;
+  line-height: 1.48;
+  color: hsla(183, 15%, 56%, 1);
+}
+
+.price {
+  font-size: 2rem;
+  line-height: 1.48;
+  letter-spacing: -0.67px;
+  color: var(--primary-cyan);
+}
+
+.reset-button {
+  margin-top: 32px;
+  width: 100%;
+  height: 48px;
+  border-radius: 5px;
+  background-color: var(--primary-cyan);
+  color: var(--neutral-very-dark-cyan);
+  font-size: 1.25rem;
+  line-height: 1.481;
+  font-weight: 700;
+}

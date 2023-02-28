@@ -84,18 +84,22 @@
           </div>
           <div class="output-group">
             <div class="tip-amount-output">
-              <div>
-                <h2>Top Amount</h2>
-                <p>/ person</p>
-                <h2>$4.27</h2>
+              <div class="tip-amount-detail-container">
+                <div class="tip-amount-detail-header">
+                  <h2>Top Amount</h2>
+                  <p>/ person</p>
+                </div>
+                <h2 class="price">$4.27</h2>
               </div>
-              <div>
-                <h2>Total</h2>
-                <p>/ person</p>
-                <h2>$32.79</h2>
+              <div class="tip-amount-detail-container">
+                <div class="tip-amount-detail-header">
+                  <h2>Total</h2>
+                  <p>/ person</p>
+                </div>
+                <h2 class="price">$32.79</h2>
               </div>
             </div>
-            <button @click="submit">RESET</button>
+            <button @click="submit" class="reset-button">RESET</button>
           </div>
         </div>
       </section>
