@@ -29,7 +29,7 @@ Users should be able to:
 ### Screenshot
 
 ![Mobile](./screenshots/tip-calculator-mobile.png)
-![Desktop](./screenshots/tip-calculator-desktop.png)
+![Desktop](./screenshots/tip-calculator-desktop2.png)
 
 ### Links
 

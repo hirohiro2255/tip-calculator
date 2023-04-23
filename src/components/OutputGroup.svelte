@@ -9,6 +9,7 @@
 
   $: tipAmount = (bill * (selectedTip / 100)) / people;
   $: totalAmount = bill / people;
+  $: isEmpty = bill <= 0 || people <= 0;
 
   function resetButton() {
     dispatch('resetButton');
@@ -24,7 +25,10 @@
           <p class="person">/ person</p>
         </div>
         <h4 class="tip-amount">
-          ${isNaN(tipAmount) || !isFinite(tipAmount) || tipAmount <= 0
+          ${isEmpty ||
+          isNaN(tipAmount) ||
+          !isFinite(tipAmount) ||
+          tipAmount <= 0
             ? 0
             : tipAmount.toFixed(2)}
         </h4>
@@ -36,14 +40,19 @@
           <p class="person">/ person</p>
         </div>
         <h4 class="total-amount">
-          ${isNaN(totalAmount) || !isFinite(totalAmount) || totalAmount <= 0
+          ${isEmpty ||
+          isNaN(totalAmount) ||
+          !isFinite(totalAmount) ||
+          totalAmount <= 0
             ? 0
             : totalAmount.toFixed(2)}
         </h4>
       </div>
     </div>
 
-    <button on:click={resetButton} class="reset-button">RESET</button>
+    <button disabled={isEmpty} on:click={resetButton} class="reset-button"
+      >RESET</button
+    >
   </div>
 </section>
 
@@ -112,6 +121,11 @@
     line-height: 1.481;
     border-style: none;
     border-radius: 5px;
+  }
+  .reset-button:disabled,
+  .reset-button[disabled] {
+    background-color: hsla(183, 78%, 24%, 1);
+    color: hsla(183, 100%, 15%, 1);
   }
 
   @media screen and (min-width: 768px) {
