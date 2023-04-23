@@ -4,10 +4,26 @@
   import logo from './assets/logo.svg';
 
   let bill = 0;
-  let people = 0;
+  let people = 1;
+  let newTip = null;
   let selectedTip = 0;
-  let tipOptions = [5, 10, 15, 20];
+  let tipOptions = [{ id: uuid(), tip: 5}, { id: uuid(), tip: 10}];
   let editing = false;
+  let billErrorMsg = '';
+  let peopleErrorMsg = '';
+
+  function checkType(v) {
+    return Object.prototype.toString.call(v);
+  }
+
+  // https://github.com/sveltejs/svelte-todomvc/blob/master/src/TodoMVC.svelte
+  function uuid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      const r = Math.random() * 16 | 0;
+      const v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
 
   function handleBill(event) {
     /**
@@ -22,21 +38,20 @@
      */
     // const n = Number.parseInt(event.detail.bill, 10);
     if (event.detail.bill.length === 0) {
-      console.log('Empty!');
+      billErrorMsg = '';
       return;
     }
     const parsedBill = Number.parseFloat(event.detail.bill);
     if (parsedBill <= -1) {
-      console.log('negative number!!');
+      billErrorMsg = 'Cannot accept negative number'
     } else if (isNaN(parsedBill)) {
-      console.log('NaN!!');
+      billErrorMsg = 'Cannot accept non-numeric letters';
     } else if (parsedBill.toString().length >= 6) {
-      console.log('too high');
-      return;
+      billErrorMsg = 'Input must be less than 6-digits-length'
     } else {
       // implementation for the parsable input
       bill = parsedBill;
-      console.log(bill);
+      billErrorMsg = '';
     }
   }
 
@@ -46,12 +61,14 @@
     }
     const parsedNumber = Number.parseInt(event.detail.people, 10);
     if (parsedNumber <= -1) {
+      peopleErrorMsg = 'Cannot accept negative number'
     } else if (isNaN(parsedNumber)) {
+      peopleErrorMsg = 'Cannot accept non-numeric letters';
     } else if (parsedNumber.toString().length >= 19) {
-      console.log('Really? a lot!!');
+      peopleErrorMsg = 'Really? a lot!!'
     } else {
       people = parsedNumber;
-      console.log(people);
+      peopleErrorMsg = ''
     }
   }
 
@@ -63,7 +80,7 @@
   function handleDeleteOption(event) {
     const { tipOption } = event.detail;
     tipOptions = tipOptions.filter((option) => {
-      return option !== tipOption;
+      return option.tip !== tipOption;
     });
     selectedTip = selectedTip === tipOption ? 0 : selectedTip;
   }
@@ -80,6 +97,37 @@
 
   function removeFocus() {
     editing = false;
+    if (checkType(newTip) === '[object Number]') {
+      for (let i = 0; i < tipOptions.length; i++) {
+        if (tipOptions[i].tip === newTip) {
+          return;
+        }
+      }
+      tipOptions = [...tipOptions, { id: uuid(), tip: newTip }]
+    }
+    newTip = null;
+  }
+
+  function finishEditing() {
+    editing = false;
+    if (checkType(newTip) === '[object Number]') {
+      for (let i = 0; i < tipOptions.length; i++) {
+        if (tipOptions[i].tip === newTip) {
+          return;
+        }
+      }
+      tipOptions = [...tipOptions, { id: uuid(), tip: newTip }]
+    }
+    newTip = null;
+  }
+
+  function handleNewTip(event) {
+    const n = Number.parseInt(event.detail.newTip, 10);
+    if (isNaN(n) || n >= 100 || n <= -1) {
+      return;
+    }
+    newTip = n;
+
   }
 
 </script>
@@ -94,6 +142,10 @@
       {people}
       {tipOptions}
       {selectedTip}
+      {billErrorMsg}
+      {peopleErrorMsg}
+      on:handleNewTip={handleNewTip}
+      on:finishEditing={finishEditing}
       on:removeFocus={removeFocus}
       on:handleCustom={handleCustom}
       on:handleTip={handleTip}

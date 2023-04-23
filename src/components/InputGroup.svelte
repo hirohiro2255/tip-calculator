@@ -2,11 +2,18 @@
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
 
+  const ENTER = 'Enter';
+  const ESCAPE = 'Escape';
+
   export let bill = 0;
   export let people = 0;
-  export let tipOptions;
+  export let tipOptions = [];
   export let selectedTip;
   export let editing;
+  export let billErrorMsg = '';
+  export let peopleErrorMsg = '';
+
+  $: addTipButtonEnabled = tipOptions.length >= 5;
 
   function handleInput(event) {
     dispatch('handleBill', {
@@ -31,8 +38,19 @@
   function handleCustom() {
     dispatch('handleCustom');
   }
-  function removeFocus() {
+  function removeFocus(event) {
     dispatch('removeFocus');
+  }
+  function finishEditing(event) {
+    if (event.key === ENTER || event.key === ESCAPE) {
+      dispatch('finishEditing');
+    }
+  }
+
+  function handleNewTip(event) {
+    dispatch('handleNewTip', {
+      newTip: event.target.value
+    });
   }
 </script>
 
@@ -40,36 +58,39 @@
   <div class="bill-group">
     <h3 class="tip-title">Bill</h3>
     <input
-      class="bill-input"
+      class={ billErrorMsg.length === 0 ?  "bill-input" : "error-input"}
       type="text"
       placeholder="0"
       on:input={handleInput}
       bind:value={bill}
     />
-    <small class="error-msg">Hello there</small>
+    <small class="error-msg">{billErrorMsg}</small>
   </div>
   <div class="tip-selection-group">
     <div class="tip-selection-header">
       <h3 class="tip-title">Select Tip %</h3>
-      <!-- <button on:dblclick={() => console.log('Hi there')} class="custom-button">Dblclick to Custom</button> -->
     </div>
     <div class="tip-buttons-group">
       {#if editing}
         <div class="button-container">
-          <input autofocus type="text" on:blur={removeFocus} />
+          <input class="add-input-text" autofocus
+          type="number"
+          on:input={handleNewTip}
+          on:blur={removeFocus}
+          on:keydown={finishEditing} />
         </div>
       {:else}
         <div class="button-container">
-          <button on:click={handleCustom} class="custom-button">Custom</button>
+          <button disabled={addTipButtonEnabled} on:click={handleCustom} class="custom-button">Custom</button>
         </div>
       {/if}
-      {#each tipOptions as tip (tip)}
+      {#each tipOptions as obj (obj.id)}
         <div class="button-container">
           <button
-            class={selectedTip === tip ? 'focusedButton' : 'button'}
-            on:click={() => handleTip(tip)}>{tip}%</button
+            class={selectedTip === obj.tip ? 'focusedButton' : 'button'}
+            on:click={() => handleTip(obj.tip)}>{obj.tip}%</button
           >
-          <button class="delete-button" on:click={() => handleDeleteOption(tip)}
+          <button class="delete-button" on:click={() => handleDeleteOption(obj.tip)}
             ><i class="fa-solid fa-xmark" /></button
           >
         </div>
@@ -81,11 +102,11 @@
     <input
       on:input={handlePeople}
       bind:value={people}
-      class="number-of-people"
+      class={ peopleErrorMsg.length === 0 ?  "number-of-people" : "error-input"}
       type="text"
       placeholder="0"
     />
-    <small class="error-msg">Hello there</small>
+    <small class="error-msg">{peopleErrorMsg}</small>
   </div>
 </section>
 
@@ -139,11 +160,25 @@
     opacity: 0.7;
     transition: 0.3s;
   }
+  .custom-button:disabled,
+  .custom-button[disabled] {
+    opacity: 0.2;
+  }
+  .add-input-text {
+    width: 100%;
+    text-align: right;
+    font-size: 1.5rem; /* same as size on desktop */
+    font-weight: 700;
+    line-height: 1.48;
+  }
   .tip-buttons-group {
     margin-top: 16px;
     display: grid;
     grid-template: repeat(3, 48px) / 1fr 1fr;
     gap: 16px;
+  }
+  .people-group {
+    margin-top: 32px;
   }
   .button-container {
     display: flex;
@@ -224,13 +259,35 @@
     border: 2px solid var(--primary-strong-cyan);
     outline: none;
   }
-  .error {
-    border: 1px solid var(--neutral-error-red);
+  .error-input {
+    width: 100%;
+    margin-top: 6px;
+    height: 48px;
+    border-style: none;
+    border-radius: 5px;
+    background-color: var(--neutral-very-light-grayish-cyan);
+    font-size: 1.5rem; /* same as size on desktop */
+    font-weight: 700;
+    line-height: 1.48;
+    text-align: right;
+    background-image: url(./../assets/icon-dollar.svg);
+    background-repeat: no-repeat;
+    background-position: 17px center;
+    border: 2px solid var(--neutral-error-red);
   }
+  .error-input:focus {
+    outline: none;
+    border: 2px solid var(--neutral-error-red); 
+  }
+  /*.error-input:active {
+    outline: none;
+    border: 2px solid var(--neutral-error-red); 
+  }*/
   .error-msg {
     display: block;
     margin-top: 3px;
     font-size: 0.9rem;
+    height: 22px;
     color: var(--neutral-error-red);
   }
 
@@ -257,6 +314,25 @@
     }
     .people-group {
       margin-top: 40px;
+    }
+    .error-input {
+      width: 100%;
+      margin-top: 6px;
+      height: 48px;
+      border-style: none;
+      border-radius: 5px;
+      background-color: var(--neutral-very-light-grayish-cyan);
+      font-size: 1.5rem; /* same as size on desktop */
+      font-weight: 700;
+      line-height: 1.48;
+      text-align: right;
+      background-image: url(./../assets/icon-dollar.svg);
+      background-repeat: no-repeat;
+      background-position: 17px center;
+      border: 2px solid var(--neutral-error-red);
+    }
+    .error-input:focus {
+      border: 2px solid var(--neutral-error-red); 
     }
   }
 </style>
