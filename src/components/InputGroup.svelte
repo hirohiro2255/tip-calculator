@@ -1,10 +1,27 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
+  function handleInput(event) {
+    dispatch('handleBill', {
+      bill: event.target.value,
+    });
+  }
+  function handlePeople(event) {
+    dispatch('handlePeople', {
+      people: event.target.value,
+    });
+  }
 </script>
 
 <section class="input-group">
   <div class="bill-group">
     <h3 class="tip-title">Bill</h3>
-    <input class="bill-input" type="number" placeholder="0" />
+    <input
+      class="bill-input"
+      type="text"
+      placeholder="0"
+      on:input={handleInput}
+    />
     <small class="error-msg">Hello there</small>
   </div>
   <div class="tip-selection-group">
@@ -33,7 +50,12 @@
   </div>
   <div class="people-group">
     <h3 class="tip-title">Number of People</h3>
-    <input class="number-of-people" type="number" placeholder="0" />
+    <input
+      on:input={handlePeople}
+      class="number-of-people"
+      type="text"
+      placeholder="0"
+    />
     <small class="error-msg">Hello there</small>
   </div>
 </section>

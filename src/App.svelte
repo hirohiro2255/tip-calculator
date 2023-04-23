@@ -2,13 +2,58 @@
   import InputGroup from './components/InputGroup.svelte';
   import OutputGroup from './components/OutputGroup.svelte';
   import logo from './assets/logo.svg';
+
+  let bill = 0;
+  let people = 0;
+
+  function handleBill(event) {
+    /**
+     * input patterns
+     *
+     * 1. parsable input (into number) -> NOT ERROR
+     * 2. empty (when initial page loading and all the input deleted) -> NOT ERROR
+     * 3. unparsable input -> Error
+     * 4. negative number -> Error
+     * 4. too high price (19 digit length or higher in this case) -> Possibly Error
+     * check if input is empty -> check if input is parsable
+     */
+    // const n = Number.parseInt(event.detail.bill, 10);
+    console.log(event.detail.bill.length);
+    const parsedBill = Number.parseInt(event.detail.bill, 10);
+    if (parsedBill <= -1) {
+      console.log('negative number!!');
+    } else if (isNaN(parsedBill)) {
+      console.log('NaN!!');
+    } else if (parsedBill.toString().length >= 19) {
+      console.log('too high');
+    } else {
+      // implementation for the parsable input
+      bill = parsedBill;
+      console.log(bill);
+    }
+  }
+
+  function handlePeople(event) {
+    if (event.detail.people.length === 0) {
+      return;
+    }
+    const parsedNumber = Number.parseInt(event.detail.people, 10);
+    if (parsedNumber <= -1) {
+    } else if (isNaN(parsedNumber)) {
+    } else if (parsedNumber.toString().length >= 19) {
+      console.log('Really? a lot!!');
+    } else {
+      people = parsedNumber;
+      console.log(people);
+    }
+  }
 </script>
 
 <img src={logo} alt="logo" />
 
 <section class="form-container">
   <div class="form-wrapper">
-    <InputGroup />
+    <InputGroup on:handleBill={handleBill} on:handlePeople={handlePeople} />
     <OutputGroup />
   </div>
 </section>
