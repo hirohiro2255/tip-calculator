@@ -64,6 +64,7 @@
     tipOptions = tipOptions.filter((option) => {
       return option !== tipOption;
     });
+    selectedTip = selectedTip === tipOption ? 0 : selectedTip;
   }
 
   function resetButton() {

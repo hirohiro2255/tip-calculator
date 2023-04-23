@@ -7,7 +7,7 @@
   export let people;
   export let selectedTip;
 
-  $: tipAmount = bill / selectedTip / people;
+  $: tipAmount = (bill * (selectedTip / 100)) / people;
   $: totalAmount = bill / people;
 
   function resetButton() {
