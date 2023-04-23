@@ -5,8 +5,8 @@
   const ENTER = 'Enter';
   const ESCAPE = 'Escape';
 
-  export let bill = 0;
-  export let people = 0;
+  export let bill;
+  export let people;
   export let tipOptions = [];
   export let selectedTip;
   export let editing;
@@ -58,8 +58,9 @@
   <div class="bill-group">
     <h3 class="tip-title">Bill</h3>
     <input
+      id="billInput"
       class={ billErrorMsg.length === 0 ?  "bill-input" : "error-input"}
-      type="text"
+      type="number"
       placeholder="0"
       on:input={handleInput}
       bind:value={bill}

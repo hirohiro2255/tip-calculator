@@ -24,7 +24,7 @@
           <p class="person">/ person</p>
         </div>
         <h4 class="tip-amount">
-          ${isNaN(tipAmount) || !isFinite(tipAmount) ? 0 : tipAmount.toFixed(2)}
+          ${isNaN(tipAmount) || !isFinite(tipAmount) || (tipAmount <= 0) ? 0 : tipAmount.toFixed(2)}
         </h4>
       </div>
 
@@ -34,7 +34,7 @@
           <p class="person">/ person</p>
         </div>
         <h4 class="total-amount">
-          ${isNaN(totalAmount) || !isFinite(totalAmount)
+          ${isNaN(totalAmount) || !isFinite(totalAmount) || (totalAmount <= 0)
             ? 0
             : totalAmount.toFixed(2)}
         </h4>

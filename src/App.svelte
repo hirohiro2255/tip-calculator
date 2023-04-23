@@ -38,21 +38,24 @@
      */
     // const n = Number.parseInt(event.detail.bill, 10);
     if (event.detail.bill.length === 0) {
+      bill = event.detail.bill;
       billErrorMsg = '';
       return;
     }
     const parsedBill = Number.parseFloat(event.detail.bill);
     if (parsedBill <= -1) {
       billErrorMsg = 'Cannot accept negative number'
+
     } else if (isNaN(parsedBill)) {
       billErrorMsg = 'Cannot accept non-numeric letters';
     } else if (parsedBill.toString().length >= 6) {
       billErrorMsg = 'Input must be less than 6-digits-length'
     } else {
       // implementation for the parsable input
-      bill = parsedBill;
+      // bill = parsedBill;
       billErrorMsg = '';
     }
+    bill = parsedBill;
   }
 
   function handlePeople(event) {
@@ -89,6 +92,8 @@
     bill = 0;
     people = 0;
     selectedTip = null;
+    billErrorMsg = '';
+    peopleErrorMsg = '';
   }
 
   function handleCustom() {
