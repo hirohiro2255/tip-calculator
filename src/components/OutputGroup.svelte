@@ -1,19 +1,21 @@
 <section class="output-group">
   <div class="output-wrapper">
-    <div class="tip-amount-group">
-      <div class="tip-amount-header-group">
-        <h3 class="tip-amount-header">Tip Amount</h3>
-        <p class="person">/ person</p>
+    <div>
+      <div class="tip-amount-group">
+        <div class="tip-amount-header-group">
+          <h3 class="tip-amount-header">Tip Amount</h3>
+          <p class="person">/ person</p>
+        </div>
+        <h4 class="tip-amount">$4.27</h4>
       </div>
-      <h4 class="tip-amount">$4.27</h4>
-    </div>
 
-    <div class="total-amount-group">
-      <div class="total-amount-header-group">
-        <h3 class="total-amount-header">Total</h3>
-        <p class="person">/ person</p>
+      <div class="total-amount-group">
+        <div class="total-amount-header-group">
+          <h3 class="total-amount-header">Total</h3>
+          <p class="person">/ person</p>
+        </div>
+        <h4 class="total-amount">$32.79</h4>
       </div>
-      <h4 class="total-amount">$32.79</h4>
     </div>
 
     <button class="reset-button">RESET</button>
@@ -64,6 +66,9 @@
     line-height: 1.48;
     letter-spacing: -0.67px;
   }
+  .total-amount-group {
+    margin-top: 20px;
+  }
   .total-amount {
     color: var(--primary-strong-cyan);
     font-size: clamp(2rem, 1.6479rem + 1.5023vw, 3rem);
@@ -73,7 +78,7 @@
   .reset-button {
     padding-top: 9px;
     padding-bottom: 9px;
-    margin-top: clamp(2rem, 0.0194rem + 8.4507vw, 7.625rem);
+    margin-top: clamp(2rem, -0.2227rem + 9.4836vw, 8.3125rem);
     width: 100%;
     background-color: var(--primary-strong-cyan);
     color: var(--neutral-very-dark-cyan);
@@ -82,5 +87,29 @@
     line-height: 1.481;
     border-style: none;
     border-radius: 5px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .output-group {
+      margin-top: 0px;
+      width: 49%;
+    }
+    .output-wrapper {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .total-amount-group {
+      margin-top: 25px;
+    }
+    .reset-button {
+      margin-top: 0px;
+    }
+    .reset-button:hover {
+      background-color: hsla(173, 61%, 77%, 1);
+      color: var(--neutral-very-dark-cyan);
+      transition: 0.2s;
+    }
   }
 </style>

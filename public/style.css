@@ -6,6 +6,7 @@
   --neutral-light-grayish-cyan: hsl(185, 41%, 84%);
   --neutral-very-light-grayish-cyan: hsl(189, 41%, 97%);
   --neutral-white: hsl(0, 0%, 100%);
+  --neutral-error-red: #eb2632;
 }
 
 * {
@@ -35,6 +36,7 @@ body {
     margin-top: clamp(3.125rem, 0.6382rem + 10.6103vw, 10.1875rem);
     margin-right: auto;
     margin-left: auto;
+    margin-bottom: 239px;
   }
 }
 

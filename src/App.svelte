@@ -31,4 +31,14 @@
     display: flex;
     flex-direction: column;
   }
+  @media screen and (min-width: 768px) {
+    .form-container {
+      border-radius: 25px;
+    }
+    .form-wrapper {
+      flex-direction: row;
+      justify-content: space-between;
+      /* align-items: center; */
+    }
+  }
 </style>
