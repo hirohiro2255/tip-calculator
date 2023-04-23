@@ -65,7 +65,9 @@
       return;
     }
     const parsedNumber = Number.parseInt(event.detail.people, 10);
-    if (parsedNumber <= -1) {
+    if (parsedNumber === 0) {
+      peopleErrorMsg = "Can't be zero"
+    } else if (parsedNumber <= -1) {
       peopleErrorMsg = 'Cannot accept negative number'
     } else if (isNaN(parsedNumber)) {
       peopleErrorMsg = 'Cannot accept non-numeric letters';
@@ -92,7 +94,7 @@
 
   function resetButton() {
     bill = 0;
-    people = 0;
+    people = 1;
     selectedTip = null;
     billErrorMsg = '';
     peopleErrorMsg = '';
