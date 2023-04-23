@@ -1,3 +1,20 @@
+<script>
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
+
+  export let bill;
+  export let people;
+  export let selectedTip;
+
+  $: tipAmount = bill / selectedTip / people;
+  $: totalAmount = bill / people;
+
+  function resetButton() {
+    dispatch('resetButton');
+  }
+</script>
+
 <section class="output-group">
   <div class="output-wrapper">
     <div>
@@ -6,7 +23,9 @@
           <h3 class="tip-amount-header">Tip Amount</h3>
           <p class="person">/ person</p>
         </div>
-        <h4 class="tip-amount">$4.27</h4>
+        <h4 class="tip-amount">
+          ${isNaN(tipAmount) || !isFinite(tipAmount) ? 0 : tipAmount.toFixed(2)}
+        </h4>
       </div>
 
       <div class="total-amount-group">
@@ -14,11 +33,15 @@
           <h3 class="total-amount-header">Total</h3>
           <p class="person">/ person</p>
         </div>
-        <h4 class="total-amount">$32.79</h4>
+        <h4 class="total-amount">
+          ${isNaN(totalAmount) || !isFinite(totalAmount)
+            ? 0
+            : totalAmount.toFixed(2)}
+        </h4>
       </div>
     </div>
 
-    <button class="reset-button">RESET</button>
+    <button on:click={resetButton} class="reset-button">RESET</button>
   </div>
 </section>
 

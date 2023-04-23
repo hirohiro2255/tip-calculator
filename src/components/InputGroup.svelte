@@ -1,6 +1,12 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
+
+  export let bill = 0;
+  export let people = 0;
+  export let tipOptions;
+  export let selectedTip;
+
   function handleInput(event) {
     dispatch('handleBill', {
       bill: event.target.value,
@@ -9,6 +15,16 @@
   function handlePeople(event) {
     dispatch('handlePeople', {
       people: event.target.value,
+    });
+  }
+  function handleTip(tip) {
+    dispatch('handleTip', {
+      tip,
+    });
+  }
+  function handleDeleteOption(val) {
+    dispatch('handleDeleteOption', {
+      tipOption: val,
     });
   }
 </script>
@@ -21,6 +37,7 @@
       type="text"
       placeholder="0"
       on:input={handleInput}
+      bind:value={bill}
     />
     <small class="error-msg">Hello there</small>
   </div>
@@ -30,28 +47,24 @@
       <button class="custom-button">Click to Custom</button>
     </div>
     <div class="tip-buttons-group">
-      <div class="button-container">
-        <button class="button">5%</button>
-        <button class="delete-button"><i class="fa-solid fa-xmark" /></button>
-      </div>
-      <div class="button-container">
-        <button class="button">10%</button>
-        <button class="delete-button"><i class="fa-solid fa-xmark" /></button>
-      </div>
-      <div class="button-container">
-        <button class="button">15%</button>
-        <button class="delete-button"><i class="fa-solid fa-xmark" /></button>
-      </div>
-      <div class="button-container">
-        <button class="button">20%</button>
-        <button class="delete-button"><i class="fa-solid fa-xmark" /></button>
-      </div>
+      {#each tipOptions as tip (tip)}
+        <div class="button-container">
+          <button
+            class={selectedTip === tip ? 'focusedButton' : 'button'}
+            on:click={() => handleTip(tip)}>{tip}%</button
+          >
+          <button class="delete-button" on:click={() => handleDeleteOption(tip)}
+            ><i class="fa-solid fa-xmark" /></button
+          >
+        </div>
+      {/each}
     </div>
   </div>
   <div class="people-group">
     <h3 class="tip-title">Number of People</h3>
     <input
       on:input={handlePeople}
+      bind:value={people}
       class="number-of-people"
       type="text"
       placeholder="0"
@@ -120,7 +133,7 @@
     display: flex;
   }
   .button {
-    flex: 3;
+    flex: 5;
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1.48;
@@ -133,6 +146,23 @@
     background-color: hsla(173, 61%, 77%, 1);
     color: var(--neutral-very-dark-cyan);
     transition: 0.2s;
+  }
+  .button:focus {
+    background-color: hsla(173, 61%, 77%, 1);
+    color: var(--neutral-very-dark-cyan);
+  }
+  .focusedButton {
+    flex: 5;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.48;
+    border-radius: 5px;
+    border-style: none;
+    background-color: hsla(173, 61%, 77%, 1);
+    color: var(--neutral-very-dark-cyan);
+  }
+  .button:active {
+    opacity: 0.5;
   }
   .delete-button {
     flex: 1;

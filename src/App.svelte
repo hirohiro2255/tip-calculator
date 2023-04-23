@@ -5,6 +5,8 @@
 
   let bill = 0;
   let people = 0;
+  let selectedTip = 0;
+  let tipOptions = [5, 10, 15, 20];
 
   function handleBill(event) {
     /**
@@ -18,14 +20,18 @@
      * check if input is empty -> check if input is parsable
      */
     // const n = Number.parseInt(event.detail.bill, 10);
-    console.log(event.detail.bill.length);
-    const parsedBill = Number.parseInt(event.detail.bill, 10);
+    if (event.detail.bill.length === 0) {
+      console.log('Empty!');
+      return;
+    }
+    const parsedBill = Number.parseFloat(event.detail.bill);
     if (parsedBill <= -1) {
       console.log('negative number!!');
     } else if (isNaN(parsedBill)) {
       console.log('NaN!!');
-    } else if (parsedBill.toString().length >= 19) {
+    } else if (parsedBill.toString().length >= 6) {
       console.log('too high');
+      return;
     } else {
       // implementation for the parsable input
       bill = parsedBill;
@@ -47,14 +53,41 @@
       console.log(people);
     }
   }
+
+  function handleTip(event) {
+    const { tip } = event.detail;
+    selectedTip = tip;
+  }
+
+  function handleDeleteOption(event) {
+    const { tipOption } = event.detail;
+    tipOptions = tipOptions.filter((option) => {
+      return option !== tipOption;
+    });
+  }
+
+  function resetButton() {
+    bill = 0;
+    people = 0;
+    selectedTip = null;
+  }
 </script>
 
 <img src={logo} alt="logo" />
 
 <section class="form-container">
   <div class="form-wrapper">
-    <InputGroup on:handleBill={handleBill} on:handlePeople={handlePeople} />
-    <OutputGroup />
+    <InputGroup
+      {bill}
+      {people}
+      {tipOptions}
+      {selectedTip}
+      on:handleTip={handleTip}
+      on:handleBill={handleBill}
+      on:handlePeople={handlePeople}
+      on:handleDeleteOption={handleDeleteOption}
+    />
+    <OutputGroup on:resetButton={resetButton} {bill} {people} {selectedTip} />
   </div>
 </section>
 
