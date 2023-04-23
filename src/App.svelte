@@ -7,7 +7,10 @@
   let people = 1;
   let newTip = null;
   let selectedTip = 0;
-  let tipOptions = [{ id: uuid(), tip: 5}, { id: uuid(), tip: 10}];
+  let tipOptions = [
+    { id: uuid(), tip: 5 },
+    { id: uuid(), tip: 10 },
+  ];
   let editing = false;
   let billErrorMsg = '';
   let peopleErrorMsg = '';
@@ -19,8 +22,8 @@
   // https://github.com/sveltejs/svelte-todomvc/blob/master/src/TodoMVC.svelte
   function uuid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-      const r = Math.random() * 16 | 0;
-      const v = c == 'x' ? r : (r & 0x3 | 0x8);
+      const r = (Math.random() * 16) | 0;
+      const v = c == 'x' ? r : (r & 0x3) | 0x8;
       return v.toString(16);
     });
   }
@@ -44,12 +47,11 @@
     }
     const parsedBill = Number.parseFloat(event.detail.bill);
     if (parsedBill <= -1) {
-      billErrorMsg = 'Cannot accept negative number'
-
+      billErrorMsg = 'Cannot accept negative number';
     } else if (isNaN(parsedBill)) {
       billErrorMsg = 'Cannot accept non-numeric letters';
     } else if (parsedBill.toString().length >= 6) {
-      billErrorMsg = 'Input must be less than 6-digits-length'
+      billErrorMsg = 'Input must be less than 6-digits-length';
     } else {
       // implementation for the parsable input
       // bill = parsedBill;
@@ -66,15 +68,15 @@
     }
     const parsedNumber = Number.parseInt(event.detail.people, 10);
     if (parsedNumber === 0) {
-      peopleErrorMsg = "Can't be zero"
+      peopleErrorMsg = "Can't be zero";
     } else if (parsedNumber <= -1) {
-      peopleErrorMsg = 'Cannot accept negative number'
+      peopleErrorMsg = 'Cannot accept negative number';
     } else if (isNaN(parsedNumber)) {
       peopleErrorMsg = 'Cannot accept non-numeric letters';
     } else if (parsedNumber.toString().length >= 19) {
-      peopleErrorMsg = 'Really? a lot!!'
+      peopleErrorMsg = 'Really? a lot!!';
     } else {
-      peopleErrorMsg = ''
+      peopleErrorMsg = '';
     }
     people = parsedNumber;
   }
@@ -112,7 +114,7 @@
           return;
         }
       }
-      tipOptions = [...tipOptions, { id: uuid(), tip: newTip }]
+      tipOptions = [...tipOptions, { id: uuid(), tip: newTip }];
     }
     newTip = null;
   }
@@ -125,7 +127,7 @@
           return;
         }
       }
-      tipOptions = [...tipOptions, { id: uuid(), tip: newTip }]
+      tipOptions = [...tipOptions, { id: uuid(), tip: newTip }];
     }
     newTip = null;
   }
@@ -136,9 +138,7 @@
       return;
     }
     newTip = n;
-
   }
-
 </script>
 
 <img src={logo} alt="logo" />
