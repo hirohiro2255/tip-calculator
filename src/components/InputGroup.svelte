@@ -6,6 +6,7 @@
   export let people = 0;
   export let tipOptions;
   export let selectedTip;
+  export let editing;
 
   function handleInput(event) {
     dispatch('handleBill', {
@@ -27,6 +28,12 @@
       tipOption: val,
     });
   }
+  function handleCustom() {
+    dispatch('handleCustom');
+  }
+  function removeFocus() {
+    dispatch('removeFocus');
+  }
 </script>
 
 <section class="input-group">
@@ -44,9 +51,18 @@
   <div class="tip-selection-group">
     <div class="tip-selection-header">
       <h3 class="tip-title">Select Tip %</h3>
-      <button class="custom-button">Click to Custom</button>
+      <!-- <button on:dblclick={() => console.log('Hi there')} class="custom-button">Dblclick to Custom</button> -->
     </div>
     <div class="tip-buttons-group">
+      {#if editing}
+        <div class="button-container">
+          <input autofocus type="text" on:blur={removeFocus} />
+        </div>
+      {:else}
+        <div class="button-container">
+          <button on:click={handleCustom} class="custom-button">Custom</button>
+        </div>
+      {/if}
       {#each tipOptions as tip (tip)}
         <div class="button-container">
           <button
@@ -107,7 +123,7 @@
     justify-content: space-between;
     align-items: center;
   }
-  .custom-button {
+  /*.custom-button {
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 0.9rem;
@@ -118,7 +134,7 @@
     border-radius: 5px;
     background-color: var(--neutral-dark-grayish-cyan);
     border-style: none;
-  }
+  }*/
   .custom-button:hover {
     opacity: 0.7;
     transition: 0.3s;
@@ -131,6 +147,16 @@
   }
   .button-container {
     display: flex;
+  }
+  .custom-button {
+    flex: 5;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.48;
+    color: var(--neutral-white);
+    background-color: var(--neutral-dark-grayish-cyan);
+    border-radius: 5px;
+    border-style: none;
   }
   .button {
     flex: 5;

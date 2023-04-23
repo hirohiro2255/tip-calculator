@@ -7,6 +7,7 @@
   let people = 0;
   let selectedTip = 0;
   let tipOptions = [5, 10, 15, 20];
+  let editing = false;
 
   function handleBill(event) {
     /**
@@ -72,6 +73,15 @@
     people = 0;
     selectedTip = null;
   }
+
+  function handleCustom() {
+    editing = true;
+  }
+
+  function removeFocus() {
+    editing = false;
+  }
+
 </script>
 
 <img src={logo} alt="logo" />
@@ -79,10 +89,13 @@
 <section class="form-container">
   <div class="form-wrapper">
     <InputGroup
+      {editing}
       {bill}
       {people}
       {tipOptions}
       {selectedTip}
+      on:removeFocus={removeFocus}
+      on:handleCustom={handleCustom}
       on:handleTip={handleTip}
       on:handleBill={handleBill}
       on:handlePeople={handlePeople}
