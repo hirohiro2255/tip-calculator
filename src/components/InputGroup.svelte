@@ -104,7 +104,7 @@
       on:input={handlePeople}
       bind:value={people}
       class={ peopleErrorMsg.length === 0 ?  "number-of-people" : "error-input"}
-      type="text"
+      type="number"
       placeholder="0"
     />
     <small class="error-msg">{peopleErrorMsg}</small>

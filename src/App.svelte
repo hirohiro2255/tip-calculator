@@ -60,6 +60,8 @@
 
   function handlePeople(event) {
     if (event.detail.people.length === 0) {
+      people = event.detail.people;
+      peopleErrorMsg = '';
       return;
     }
     const parsedNumber = Number.parseInt(event.detail.people, 10);
@@ -70,9 +72,9 @@
     } else if (parsedNumber.toString().length >= 19) {
       peopleErrorMsg = 'Really? a lot!!'
     } else {
-      people = parsedNumber;
       peopleErrorMsg = ''
     }
+    people = parsedNumber;
   }
 
   function handleTip(event) {
